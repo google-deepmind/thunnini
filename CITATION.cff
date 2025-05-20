@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Please cite this software as:"
+authors:
+- family-names: "Genewein"
+  given-names: "Tim"
+- family-names: "Li"
+  given-names: "Kevin Wenliang"
+- family-names: "Ruoss"
+  given-names: "Anian"
+title: "Thunnini"
+date-released: 2025-05-23
+url: "https://github.com/google-deepmind/thunnini.git"

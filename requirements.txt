@@ -1,0 +1,12 @@
+absl-py
+chex
+distrax
+flax
+jax
+jaxtyping
+matplotlib
+numpy
+optax
+scipy
+scikit-learn
+notebook
