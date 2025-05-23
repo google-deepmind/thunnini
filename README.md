@@ -1,8 +1,12 @@
 # Thunnini
 
-Full Thunnini experiment notebook: [![Full Experiment Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniExperiment.ipynb)
+Thunnini Demo notebook: [![Demo notebook](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniDemo.ipynb)<br>
+Full Thunnini experiment notebook: [![Full Experiment notebook](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniExperiment.ipynb)
 
-Thunnini Demo notebook: [![Demo Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniDemo.ipynb)
+For more details and use-cases, see Thunnini's main publication:<br>
+**Understanding Prompt Tuning and In-Context Learning via Meta-Learning** (Genewein et al. 2025, [arXiv](https://arxiv.org/abs/2505.17010)).
+
+---
 
 Thunnini is an experimentation library to study and understand fundamental
 aspects of fine-tuners for neural sequence predictors. Currently, 9 different
@@ -10,9 +14,7 @@ tuners, such as soft prompting, embedding tuning, or low-rank adaptation (LoRA),
 are implemented on two neural architectures (LSTMs and transformers). Thunnini
 is also the name of the zoological tribe of the tunas (17 species).
 
-![Taxonomy of fine tunas for neural sequence predictors](https://raw.githubusercontent.com/google-deepmind/thunnini/master/assets/img/ThunniniTaxonomy.svg" "Taxonomy of neural network fine tunas.")
-
-For a detailed use of Thunnini and additional methodological details, see the publication: **Understanding Prompt Tuning and In-Context Learning via Meta-Learning** ([paper](https://arxiv.org/abs/xxxx.yyyyy)).
+![Taxonomy of fine tunas for neural sequence predictors](https://raw.githubusercontent.com/google-deepmind/thunnini/master/assets/img/ThunniniTaxonomy.svg "Taxonomy of neural network fine tunas.")
 
 Thunnini provides functionality to:
 
@@ -53,14 +55,14 @@ of Thunnini.
 
 ## Usage
 
-The fastest (and installation-free) way to get started with Thunnini is via
+The fastest way to get started with Thunnini is via
 Google's [colab](https://colab.research.google.com/), where you can directly run
-notebooks in the cloud and point them to include code from
-[Thunnini's git repo](https://github.com/google-deepmind/thunnini). You can use
-the following links to go straight to the
-[Full Experiment Colab](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniExperiment.ipynb)
+notebooks in the cloud (the colabs will automatically clone
+[Thunnini's git repo](https://github.com/google-deepmind/thunnini) when running on Colab). You can use
+the following links to open the
+[Full Experiment notebook](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniExperiment.ipynb)
 or the
-[Demo Colab](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniDemo.ipynb).
+[Demo notebook](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniDemo.ipynb) on Colab.
 Note that it is recommended that you use a GPU runtime, both locally and
 on Colab. If no GPU runtime is available small experiments can be run on a CPU
 by adjusting experiment settings (shorter sequences, smaller models, fewer
@@ -121,10 +123,10 @@ Start a local Jupyter notebook with:
 jupyter notebook
 ```
 
-This will give you a (local) URL with an authentication token which you need to
-copy and paste into your browser. From there, navigate to `thunnini/colabs` and
-open one of the two notebooks. Alternatively, the local notebook server can be
-set as a local runtime for Colab. See
+This will give you a (local) URL in the terminal with an authentication token
+which you need to click on or copy and paste into your browser. From there,
+navigate to `thunnini/colabs` and open one of the two notebooks. Alternatively,
+the local notebook server can be set as a local runtime for Colab. See
 [local Colab runtimes](https://research.google.com/colaboratory/local-runtimes.html)
 for instructions, including how to access Colab Docker runtime images with GPU
 support.
@@ -215,7 +217,7 @@ predictors (torsos).
 ├── assets
 |   └── img                             - Images for Readme.md
 |
-├── colabs                          - Main entry point to run standard experiments
+├── colabs                              - Main entry point to run standard experiments
 |   ├── ThunniniDemo.ipynb              - Demo notebook showcasing Thunnini features
 |   └── ThunniniExperiment.ipynb        - Easily configurable full experiment pipeline
 |
@@ -234,13 +236,13 @@ predictors (torsos).
 |   ├── tuning.py                       - Fine-tuning loop (for all tuning methods)
 |   └── types.py                        - Type definitions and literals
 |
-├── tests                           - Tests, use these to ensure compatibility for new torsos and data generators
+├── tests                               - Tests, use these to ensure compatibility for new torsos and data generators
 |
-├── CIATATION.cff                   - Citation info for Thunnini
-├── Contributing.md                 - Contribution info.
-├── LICENSE                         - Thunnini's license.
-├── README.md                       - This file
-└── requirements.txt                - Dependencies
+├── CIATATION.cff                       - Citation info for Thunnini
+├── Contributing.md                     - Contribution info.
+├── LICENSE                             - Thunnini's license.
+├── README.md                           - This file
+└── requirements.txt                    - Dependencies
 ```
 
 ### Extending Thunnini
@@ -311,10 +313,10 @@ Cite Thunnini's main publication as:
       title={Understanding Prompt Tuning and In-Context Learning via Meta-Learning},
       author={Genewein, Tim and Li, Kevin Wenliang and Ruoss, Anian, and Grau-Moya, Jordi, and Orseau, Laurent, and Hutter, Marcus},
       year={2025},
-      eprint={xxxx.yyyyy},
+      eprint={2505.17010},
       archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/xxxx.yyyyy},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2505.17010},
 }
 ```
 
