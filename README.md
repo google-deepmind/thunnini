@@ -22,12 +22,12 @@ Thunnini provides functionality to:
     samples from a data generator.
 2.  **Fine-tune** neural models to a target data distribution. Tune either
     weights (original weights, or additional weights, like in LoRA), or tune a
-    prompt prefix (soft prompting).
+    prompt prefix (e.g., Soft Prompting).
 3.  **Evaluate** tuned models' prediction performance on one or more evaluation
     data distributions.
 4.  **Compare** different architectures and fine-tuning methods, and compare
-    against baselines: the optimal oracle predictor, the several exact Bayesian
-    predictors, and the untuned model.
+    against baselines: the optimal oracle predictor, several exact Bayesian
+    predictors, and the untuned neural predictors.
 
 *Simple experimentation:* Standard Thunnini experiments are very simple to
 specify via a set of configurations (plain-text dicts or dataclasses) for data
@@ -44,32 +44,33 @@ fine-tuning, evaluation and comparison) by setting a few lines of configuration.
 *Easily extendable:* Thunnini can be extended with more predictors and data
 generators by implementing the respective interfaces and passing all tests.
 
-The design philosophy is to provide a lightweight and nimble experimentation
-library to study conceptual aspects of fine-tuning methods, and prompting
-untrained networks, by having full understanding and control over the data
+The design philosophy is to provide a nimble experimentation library for
+studying conceptual aspects of fine-tuning methods and prompting untrained
+networks, enabled by having full understanding and control over the data
 distributions. Connections to the theory of meta-learning and Bayesian
 sequential prediction from SGD-based log loss minimization, can easily be
-verified empirically. Thunnini aims at models and data that train or fine-tune
-on a single GPU within minutes. LLM-scale experiments are (far) beyond the scope
-of Thunnini.
+verified empirically ([Genewein et al. 2025](https://arxiv.org/abs/2505.17010)).
+Thunnini aims at models and data that train or fine-tune on a single GPU within
+minutes. LLM-scale experiments are (far) beyond the scope of Thunnini.
 
 ## Usage
 
 The fastest way to get started with Thunnini is via
-Google's [colab](https://colab.research.google.com/), where you can directly run
+Google's [Colab](https://colab.research.google.com/), where you can directly run
 notebooks in the cloud (the colabs will automatically clone
-[Thunnini's git repo](https://github.com/google-deepmind/thunnini) when running on Colab). You can use
-the following links to open the
+[Thunnini's git repo](https://github.com/google-deepmind/thunnini) when running
+on Colab). You can use the following links to open the
 [Full Experiment notebook](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniExperiment.ipynb)
 or the
-[Demo notebook](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniDemo.ipynb) on Colab.
+[Demo notebook](https://colab.research.google.com/github/google-deepmind/thunnini/blob/master/colabs/ThunniniDemo.ipynb)
+on Colab.
 Note that it is recommended that you use a GPU runtime, both locally and
 on Colab. If no GPU runtime is available small experiments can be run on a CPU
 by adjusting experiment settings (shorter sequences, smaller models, fewer
 training/tuning steps, less repetitions).
 
 If you want to use thunnini locally, e.g., because you want to modify or extend
-the code or run python scripts instead of colab notebooks, use the instructions
+the code or run python scripts instead of notebooks, use the instructions
 in the next section. See also [how to run Thunnini's tests](#running-tests).
 
 ## Local installation and usage
@@ -139,8 +140,8 @@ sophisticated modifications, diving deeper into Thunnini is necessary.
 
 If you want to get a very quick overview on how to train, fine-tune, and
 evaluate a single model, use `colabs/ThunniniDemo.ipynb`; it avoids the boiler
-plate code that `ThunniniExperiment.ipynb` needs to surface all configuration
-options and collect and compare results across many fine-tuning methods.
+plate code that `ThunniniExperiment.ipynb` needs for surfacing all configuration
+options and collecting and comparing results across many fine-tuning methods.
 
 *After* you have run all experiments, etc., leave your virtual environment with:
 
@@ -171,25 +172,25 @@ The following fine-tuners are implemented:
     *   *Full weights:* fine-tune all weights.
     *   *Embedding:* fine-tune only weights of initial embedding layer.
     *   *Unembedding:* fine-tune only weights of final unembedding layer.
-    *   *Un+Embedding:* fine-tune initial and final layer.
+    *   *Un+Embedding:* fine-tune initial and final layer only.
 *   **Additional-weights tuning (1 method):** Introduce additional tunable model
     parameters, like task specific heads or adapters, and keep original model
     weights frozen.
     *   *LoRA:* [Low-rank Adaptation](https://arxiv.org/abs/2106.09685)
         introduces low-rank additive weight matrices to linear layers in
-        transformer blocks (therefore it is only supported for transformers).
+        transformer blocks (only supported for transformers).
 
 To ensure compatibility with all fine-tuning methods and other functionality
 provided by Thunnini (such as embedding-prefixed forward passes), the
 `Predictor` class wraps a `PredictorTorso` between an embedding and unembedding
 layer (among other things). Currently a `LSTMPredictorTorso` and a
 `TransformerPredictorTorso` are implemented, and it is highly recommended to add
-new neural architectures as torsos to make them instantly compatible with all of
+new neural architectures as torsos to ensure compatibility with all of
 Thunnini's functionality.
 
 ## Data generators
 
-Thunnini provides a number of standard data generators. Data generators allow to
+Thunnini provides a few standard data generators. Data generators allow to
 draw samples and return the corresponding "ground-truth" generating
 probabilities (for the oracle predictor baseline). Generators also compute their
 respective Bayesian predictors (for the Bayes optimal baseline). Currently
@@ -239,8 +240,8 @@ predictors (torsos).
 ├── tests                               - Tests, use these to ensure compatibility for new torsos and data generators
 |
 ├── CIATATION.cff                       - Citation info for Thunnini
-├── Contributing.md                     - Contribution info.
-├── LICENSE                             - Thunnini's license.
+├── Contributing.md                     - Contribution info
+├── LICENSE                             - Thunnini's license
 ├── README.md                           - This file
 └── requirements.txt                    - Dependencies
 ```
@@ -288,7 +289,7 @@ source thunnini_env/bin/activate
 export PYTHONPATH=$(pwd)/..
 ```
 
-Then run all tests with:
+Then run all (or some) tests with:
 
 ```bash
 python tests/config_test.py
@@ -301,9 +302,6 @@ python tests/tuning_test.py
 
 Make sure to check the test summary per test (6 in case of the command above).
 
-> While developing a specific feature it makes sense to only run the affected
-> tests, and only run the full suite of tests at the end of development.
-
 ## Citing Thunnini
 
 Cite Thunnini's main publication as:
@@ -311,7 +309,7 @@ Cite Thunnini's main publication as:
 ```
 @misc{genewein2025understanding,
       title={Understanding Prompt Tuning and In-Context Learning via Meta-Learning},
-      author={Genewein, Tim and Li, Kevin Wenliang and Ruoss, Anian, and Grau-Moya, Jordi, and Orseau, Laurent, and Hutter, Marcus},
+      author={Genewein, Tim and Wenliang, Li Kevin and Ruoss, Anian, and Grau-Moya, Jordi, and Orseau, Laurent, and Hutter, Marcus},
       year={2025},
       eprint={2505.17010},
       archivePrefix={arXiv},
@@ -325,7 +323,7 @@ from it, cite as:
 
 ```
 @software{genewein2025thunnini,
-  author = {Genewein, Tim and Li, Kevin Wenliang and Ruoss, Anian},
+  author = {Genewein, Tim and Wenliang, Li Kevin and Ruoss, Anian},
   month = {05},
   title = {Thunnini},
   url = {https://github.com/google-deepmind/thunnini.git},
